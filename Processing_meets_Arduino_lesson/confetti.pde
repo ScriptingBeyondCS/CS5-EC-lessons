@@ -1,5 +1,3 @@
-import processing.serial.*;
-
 /*
 * Confetti Processing Example
 * CS5 Extra Credit
