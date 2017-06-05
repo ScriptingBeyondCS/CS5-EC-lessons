@@ -14,11 +14,16 @@ void setup(){
 
 // This code loops indefinitely
 void draw(){
+  //When mouse is pressed, clear screen of all confetti
+  if(mousePressed){
+   background(0); 
+  }
+  
   //Generate a random color. Transparency depends on mouse position within window.
-  color c = color(random(255), random(255), random(255), (255.0/width)*mouseX);
+  color c = color(random(255), random(255), random(255), map(mouseX, 0, width, 80, 255));
   stroke(c);
   fill(c);
-  polygon(mouseX, random(height), mouseX/20, (mouseX/100)+5);            
+  polygon(mouseX, random(height), map(mouseX, 0, width, 5, 35), int(map(mouseY, 0, height, 4, 15)));            
 }
 
 // Helper function to draw a polygon, found in the examples
