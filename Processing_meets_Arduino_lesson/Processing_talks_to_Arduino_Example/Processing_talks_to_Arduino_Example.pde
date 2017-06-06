@@ -41,18 +41,26 @@ void setup(){
 void draw(){
   // Only read values from the serial port if it is ready, to avoid errors
   if(serialPort.available() > 0){
-    arduinoInputAsString = serialPort.readStringUntil('\n').trim();
-    arduinoInputAsInt = Integer.parseInt(arduinoInputAsString);
     
-    // Convert the Arduino analog input to a 0-255 range
-    int mappedValue = parseInt(arduinoInputAsInt * (255.0/1023.0));
+    //Read input until newline character
+    arduinoInputAsString = serialPort.readStringUntil('\n');
+    //Only use input if it is valid
+    if(arduinoInputAsString != null){
+      arduinoInputAsString = arduinoInputAsString.trim();
+      //Make sure the number is formatted correctly
+      try{
+        arduinoInputAsInt = Integer.parseInt(arduinoInputAsString);
+        // Uncomment this line to check that we're getting reasonable values in the console
+        //println(mappedValue);
     
-    // Uncomment this line to check that we're getting reasonable values in the console
-    //println(mappedValue);
-    
-    // Create a color using our analog input from the Arduino
-    c = color(mappedValue, mappedValue, mappedValue);
-   }
+        // Create a color using our analog input from the Arduino
+        c = color(arduinoInputAsInt, arduinoInputAsInt, arduinoInputAsInt);
+      } catch(NumberFormatException e){
+        //Move on
+        println("Number format exception");
+      }
+    }  
+ }
    // Draw a circle with that color.
    stroke(c);
    fill(c);
