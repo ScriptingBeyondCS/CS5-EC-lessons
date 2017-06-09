@@ -33,13 +33,12 @@ class Cake
 end
 
 if __FILE__==$0
-    cake = Cake.new
-    cake.list_ingredients
-    ingredients = ["sugar","flour","eggs","vanilla"]
-    ingredients.each {|ingredient| 
-    sleep(0.5)
-    cake.add_ingredients(ingredient)
-}
-    cake.list_ingredients
-    cake.bake
+    cake = Cake.new #create an object of class Cake
+    cake.list_ingredients 
+    ingredients = ["sugar","flour","eggs","vanilla"] 
+    ingredients.each {|ingredient| #add ingredients
+        sleep(0.5)
+        cake.add_ingredients(ingredient)}
+    cake.list_ingredients #list the added ingredients
+    cake.bake #bake the cake
 end
